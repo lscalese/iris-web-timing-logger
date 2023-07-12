@@ -3,7 +3,7 @@
   <Document name="web-timing-logger.ZPM">
     <Module>
       <Name>web-timing-logger</Name>
-      <Version>0.0.1</Version>
+      <Version>0.0.2</Version>
       <Description>Timing, global ref, executed lines logger for incoming http request process.</Description>
       <Packaging>module</Packaging>
       <SourcesRoot>src</SourcesRoot>
