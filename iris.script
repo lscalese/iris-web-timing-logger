@@ -15,5 +15,8 @@
 
     // load all the code of the project as a ZPM package
     zn "IRISAPP"
-    zpm "load /home/irisowner/irisdev/ -v":1:1
+    zpm "load /home/irisowner/irisdev/ -v":1:0
+
+    Do ##class(dc.webtiming.Config).DockerInit()
+    
     halt
