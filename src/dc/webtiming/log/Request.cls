@@ -27,6 +27,8 @@ Property PageName As %String(MAXLEN = "", TRUNCATE = 1);
 
 Property Application As %String(MAXLEN = "", TRUNCATE = 1);
 
+Property URLClean As %String(MAXLEN = "", TRUNCATE = 1);
+
 Index DateTimeI On DateTime;
 
 Index LoginI On Login [ Type = bitmap ];
@@ -80,6 +82,9 @@ Storage Default
 </Value>
 <Value name="15">
 <Value>Application</Value>
+</Value>
+<Value name="16">
+<Value>URLClean</Value>
 </Value>
 </Data>
 <DataLocation>^dc.webtiming.log.RequestD</DataLocation>

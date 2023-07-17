@@ -43,8 +43,7 @@ ClassMethod getTaskId(
 	ByRef sc As %Status = {$$$OK},
 	className As %String = {..%ClassName(1)}) As %String
 {
-	Set id = ""
-	Set tStatement = ##class(%SQL.Statement).%New()
+	Set id = "", tStatement = ##class(%SQL.Statement).%New()
 
 	$$$ThrowOnError(tStatement.%PrepareClassQuery("%SYS.Task","TaskListDetail"))
 	
@@ -54,7 +53,7 @@ ClassMethod getTaskId(
 		
 		If $$$ISERR(sc) $$$ThrowStatus(sc)
 
-		if (tResult.%Get("TaskClass")=className){
+		If tResult.%Get("TaskClass") = className {
 			Set id = tResult.%Get("ID")
 			Quit
 		}

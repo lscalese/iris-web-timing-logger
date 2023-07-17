@@ -45,4 +45,19 @@ ClassMethod AddGlobals(
     Quit
 }
 
+ClassMethod SetCleanURL(
+	URL As %String,
+	Name As %String = {..#DEFAULT}) As %Status
+{
+    Set matcher = ##class(%Regex.Matcher).%New("\/[0-9]{1,}"),
+        matcher.Text = $Piece(URL, "?", 1),  ; $Piece to exclude query string parameters
+        $$$MEASUREVAR(Name, "clean_url") = matcher.ReplaceAll("/<parameter>")
+    Return $$$OK
+}
+
+ClassMethod GetCleanURL(Name As %String = {..#DEFAULT}) As %String [ CodeMode = expression ]
+{
+$Get($$$MEASUREVAR(Name, "clean_url"))
+}
+
 }

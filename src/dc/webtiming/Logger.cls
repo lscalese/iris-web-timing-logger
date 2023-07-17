@@ -24,9 +24,9 @@ ClassMethod LogRequest(
     Set log.IP = $Select($Get(Request.CgiEnvs("HTTP_X_FORWARDED_FOR"))'="": Request.CgiEnvs("HTTP_X_FORWARDED_FOR"), 1: Request.CgiEnvs("REMOTE_ADDR"))
     Set log.HttpStatusCode = $Piece(Response.Status, " ", 1)
     Set log.URL = Request.URL
+    Set log.URLClean = ##class(dc.webtiming.Measure).GetCleanURL()
     Set log.PageName = Request.PageName
     Set log.Application = Request.Application
-    
     Set sc = log.%Save()
     
     Return sc

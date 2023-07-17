@@ -3,7 +3,10 @@ Class dc.webtiming.CSPSessionEvents Extends %CSP.SessionEvents
 
 ClassMethod OnStartRequest() As %Status
 {
-    If ##class(dc.webtiming.Config).IsMeasureEnabled() Do ##class(dc.webtiming.Measure).Start()
+    If ##class(dc.webtiming.Config).IsMeasureEnabled() {
+        Do ##class(dc.webtiming.Measure).Start()
+        Do ##class(dc.webtiming.Measure).SetCleanURL(##class(dc.webtiming.Utils).GetCleanURL())
+    }
 	
     Return $$$OK
 }

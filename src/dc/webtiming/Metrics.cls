@@ -40,43 +40,47 @@ Method GetWebAppSensors(
 	date As %String = { $ZDate($Horolog, 3)},
 	part As %String = { $Piece($HOROLOG, ",", 2) \ ..#PART}) As %Status
 {
-    Set webapp = ""
+    Set url = ""
 
-    For  {
-        Set webapp = $Order(^dc.webtiming.Metrics(webapp))
-        Quit:webapp=""
+    Try{
+        For  {
+            Set url = $Order(^dc.webtiming.Metrics(url))
+            Quit:url=""
 
-        Lock +^dc.webtiming.Metrics(webapp, date)
+            Lock +^dc.webtiming.Metrics(url, date)
 
-        Set currentDayData = $Get(^dc.webtiming.Metrics(webapp, date))
-        Set currentQuarterData = $Get(^dc.webtiming.Metrics(webapp, date, part))
+            Set currentDayData = $Get(^dc.webtiming.Metrics(url, date))
+            Set currentQuarterData = $Get(^dc.webtiming.Metrics(url, date, part))
 
-        Lock -^dc.webtiming.Metrics(webapp, date)
+            Lock -^dc.webtiming.Metrics(url, date)
 
-        Set suffix(1) = "", suffix(2) = "_current_quarter"
+            Set suffix(1) = "", suffix(2) = "_current_quarter", i = 0
 
-        For tmpData = currentDayData, currentQuarterData {
-            
-            Set totalHit = +$ListGet(tmpData, $$$TOTALHIT), suffix = suffix($Increment(i))
+            For tmpData = currentDayData, currentQuarterData {
+                
+                Set totalHit = +$ListGet(tmpData, $$$TOTALHIT), suffix = suffix($Increment(i))
 
-            Do ..SetSensor(..#GLOREFTOTAL _ suffix, +$ListGet(tmpData, $$$GLOREFTOTAL), webapp)
-            Do ..SetSensor(..#TIMINGTOTAL _ suffix, +$ListGet(tmpData, $$$TIMINGTOTAL), webapp)
-            Do ..SetSensor(..#LINESTOTAL _ suffix, +$ListGet(tmpData, $$$LINESTOTAL), webapp)
-            Do ..SetSensor(..#TIMINGMAX _ suffix, +$ListGet(tmpData, $$$TIMINGMAX), webapp)
-            Do ..SetSensor(..#LINESMAX _ suffix, +$ListGet(tmpData, $$$LINESMAX), webapp)
-            Do ..SetSensor(..#TOTALHIT _ suffix, totalHit, webapp)
-            
+                Do ..SetSensor(..#GLOREFTOTAL _ suffix, +$ListGet(tmpData, $$$GLOREFTOTAL), url)
+                Do ..SetSensor(..#TIMINGTOTAL _ suffix, +$ListGet(tmpData, $$$TIMINGTOTAL), url)
+                Do ..SetSensor(..#LINESTOTAL _ suffix, +$ListGet(tmpData, $$$LINESTOTAL), url)
+                Do ..SetSensor(..#TIMINGMAX _ suffix, +$ListGet(tmpData, $$$TIMINGMAX), url)
+                Do ..SetSensor(..#LINESMAX _ suffix, +$ListGet(tmpData, $$$LINESMAX), url)
+                Do ..SetSensor(..#TOTALHIT _ suffix, totalHit, url)
+                
 
-            Continue:totalHit'>0   
-            
-            Do ..SetSensor(..#GLOREFAVG _ suffix, +$ListGet(tmpData, $$$GLOREFTOTAL) / totalHit, webapp)
-            Do ..SetSensor(..#TIMINGAVG _ suffix, +$ListGet(tmpData, $$$TIMINGTOTAL) / totalHit, webapp)
-            Do ..SetSensor(..#LINESAVG _ suffix, +$ListGet(tmpData, $$$LINESTOTAL) / totalHit, webapp)
+                Continue:totalHit'>0   
+                
+                Do ..SetSensor(..#GLOREFAVG _ suffix, +$ListGet(tmpData, $$$GLOREFTOTAL) / totalHit, url)
+                Do ..SetSensor(..#TIMINGAVG _ suffix, +$ListGet(tmpData, $$$TIMINGTOTAL) / totalHit, url)
+                Do ..SetSensor(..#LINESAVG _ suffix, +$ListGet(tmpData, $$$LINESTOTAL) / totalHit, url)
+                
+            }
             
         }
-        
+    }catch (ex) {
+        s ^CacheTempLsc= ex.AsStatus()
     }
-    
+
     Return $$$OK
 }
 
@@ -85,6 +89,15 @@ ClassMethod SetMetrics(Application As %String = {$Select($IsObject($Get(%request
     If $Get(Application) = "" Return $$$ERROR(5001, "Parameter ""Application"" is mandatory")
 
     Set tHorolog = $Horolog, date = $ZDate(tHorolog, 3), part = $Piece(tHorolog, ",", 2) \ ..#PART, sc = $$$OK
+    
+    Set gloRef = ##class(dc.webtiming.Measure).GetGlobals(),
+        timing = ##class(dc.webtiming.Measure).GetTiming(),
+        lines = ##class(dc.webtiming.Measure).GetLines(),
+        url = ##class(dc.webtiming.Measure).GetCleanURL()
+    
+    Set:url="" url = " " ; shouldn't occur but it's just <subscript> error security.
+
+    Set urlMetricsEnabled = ##class(dc.webtiming.Config).IsURLMetricsEnabled()
 
     Lock +^dc.webtiming.Metrics(Application, date):2
     
@@ -92,34 +105,39 @@ ClassMethod SetMetrics(Application As %String = {$Select($IsObject($Get(%request
 
     Try {
 
-        Set currentDayData = $Get(^dc.webtiming.Metrics(Application, date))
-        Set currentQuarterData = $Get(^dc.webtiming.Metrics(Application, date, part))
+        Set data($$$CURRENTDAYFORAPPLICATION) = $Get(^dc.webtiming.Metrics(Application, date)),
+            data($$$CURRENTQUARTERFORAPPLICATION) = $Get(^dc.webtiming.Metrics(Application, date, part))
         
-        Set gloRef = ##class(dc.webtiming.Measure).GetGlobals()
-        Set timing = ##class(dc.webtiming.Measure).GetTiming()
-        Set lines = ##class(dc.webtiming.Measure).GetLines()
+        If urlMetricsEnabled {
+            Set data($$$CURRENTDAYFORURL) = $Get(^dc.webtiming.Metrics(url, date)),
+                data($$$CURRENTQUARTERFORURL) = $Get(^dc.webtiming.Metrics(url, date, part))
+        }
 
-        Set $List(currentDayData, $$$GLOREFTOTAL) = +$ListGet(currentDayData, $$$GLOREFTOTAL) + gloRef
-        Set $List(currentDayData, $$$TIMINGTOTAL) = +$ListGet(currentDayData, $$$TIMINGTOTAL) + timing
-        Set $List(currentDayData, $$$LINESTOTAL) = +$ListGet(currentDayData, $$$LINESTOTAL) + lines
-        Set $List(currentDayData, $$$TOTALHIT) = +$ListGet(currentDayData, $$$TOTALHIT) + 1
+        Set key = ""
 
-        If gloRef > +$ListGet(currentDayData, $$$GLOREFMAX) Set $List(currentDayData, $$$GLOREFMAX) = gloRef
-        If timing > +$ListGet(currentDayData, $$$TIMINGMAX) Set $List(currentDayData, $$$TIMINGMAX) = timing
-        If lines > +$ListGet(currentDayData, $$$LINESMAX) Set $List(currentDayData, $$$LINESMAX) = lines
+        For  {
+            Set key = $Order(data(key), 1, tmp)
+            Quit:key=""
+            
+            Set $List(tmp, $$$GLOREFTOTAL) = +$ListGet(tmp, $$$GLOREFTOTAL) + gloRef,
+                $List(tmp, $$$TIMINGTOTAL) = +$ListGet(tmp, $$$TIMINGTOTAL) + timing,
+                $List(tmp, $$$LINESTOTAL) = +$ListGet(tmp, $$$LINESTOTAL) + lines,
+                $List(tmp, $$$TOTALHIT) = +$ListGet(tmp, $$$TOTALHIT) + 1
+
+            If gloRef > +$ListGet(tmp, $$$GLOREFMAX) Set $List(tmp, $$$GLOREFMAX) = gloRef
+            If timing > +$ListGet(tmp, $$$TIMINGMAX) Set $List(tmp, $$$TIMINGMAX) = timing
+            If lines > +$ListGet(tmp, $$$LINESMAX) Set $List(tmp, $$$LINESMAX) = lines
+
+            Set data(key) = tmp
+        }
+
+        Set ^dc.webtiming.Metrics(Application, date) = data($$$CURRENTDAYFORAPPLICATION),
+            ^dc.webtiming.Metrics(Application, date, part) = data($$$CURRENTQUARTERFORAPPLICATION)
         
-
-        Set $List(currentQuarterData, $$$GLOREFTOTAL) = +$ListGet(currentQuarterData, $$$GLOREFTOTAL) + gloRef
-        Set $List(currentQuarterData, $$$TIMINGTOTAL) = +$ListGet(currentQuarterData, $$$TIMINGTOTAL) + timing
-        Set $List(currentQuarterData, $$$LINESTOTAL) = +$ListGet(currentQuarterData, $$$LINESTOTAL) + lines
-        Set $List(currentQuarterData, $$$TOTALHIT) = +$ListGet(currentQuarterData, $$$TOTALHIT) + 1
-        
-        If gloRef > +$ListGet(currentQuarterData, $$$GLOREFMAX) Set $List(currentQuarterData, $$$GLOREFMAX) = gloRef
-        If timing > +$ListGet(currentQuarterData, $$$TIMINGMAX) Set $List(currentQuarterData, $$$TIMINGMAX) = timing
-        If lines > +$ListGet(currentQuarterData, $$$LINESMAX) Set $List(currentQuarterData, $$$LINESMAX) = lines
-
-        Set ^dc.webtiming.Metrics(Application, date) = currentDayData
-        Set ^dc.webtiming.Metrics(Application, date, part) = currentQuarterData
+        If urlMetricsEnabled {
+            Set ^dc.webtiming.Metrics(url, date) = data($$$CURRENTDAYFORURL),
+                ^dc.webtiming.Metrics(url, date, part) = data($$$CURRENTQUARTERFORURL)
+        }
 
         Lock -^dc.webtiming.Metrics(Application, date)
 
