@@ -226,14 +226,24 @@ ClassMethod DockerInit()
 {
     Do ..DefaultSetup()
 
-    New $Namespace
-    Set $Namespace = "%SYS"
-    
-    Do ##class(Security.Applications).Get("/api/monitor", .p)
-    Set p("EventClass") = "dc.webtiming.CSPSessionEvents"
-    Do ##class(Security.Applications).Modify("/api/monitor", .p)
+    Do ..AddEventClassToWebApp("/api/monitor", "dc.webtiming.CSPSessionEvents")
 
     Quit
+}
+
+ClassMethod AddEventClassToWebApp(
+	Application As %String,
+	EventClass As %String = "dc.webtiming.CSPSessionEvents") As %Status
+{
+    Set sc = $$$OK
+
+    New $Namespace Set $Namespace = "%SYS"
+    
+    If '##class(Security.Applications).Exists(Application) Quit $$$ERROR(5001, $$$FormatText("Application %1 does not exist.", Application))
+
+    Do ##class(Security.Applications).Get(Application, .p)
+    Set p("EventClass") = EventClass
+    Quit ##class(Security.Applications).Modify(Application, .p)
 }
 
 XData Description [ MimeType = application/json ]
