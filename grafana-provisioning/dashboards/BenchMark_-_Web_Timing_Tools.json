@@ -1,0 +1,3522 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 2,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 17,
+      "panels": [],
+      "title": "Rest Measure without logging",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "description": "This the number of global reference for measuring a REST request including only metrics (without request logging)",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 100
+              },
+              {
+                "color": "red",
+                "value": 150
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 1
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "builder",
+          "expr": "webmeasure_benchmark_gloref{id=\"REST_1_Job(s)_Log_0_Iteration_1_jobnumer_1\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "GloRef",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-yellow",
+                "value": 0.001
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 0.0015
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 0.002
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 5,
+        "y": 1
+      },
+      "id": 18,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Value$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "builder",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_1_Job(s)_Log_0_Iteration_1_jobnumer_1\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Response time",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 5
+              },
+              {
+                "color": "red",
+                "value": 7.5
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 10,
+        "y": 1
+      },
+      "id": 21,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "builder",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_1\"}",
+          "legendFormat": "Job 1",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "builder",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_2\"}",
+          "hide": false,
+          "legendFormat": "Job 2",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_3\"}",
+          "hide": false,
+          "legendFormat": "Job 3",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_4\"}",
+          "hide": false,
+          "legendFormat": "Job 4",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_5\"}",
+          "hide": false,
+          "legendFormat": "Job 5",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_6\"}",
+          "hide": false,
+          "legendFormat": "Job 6",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_7\"}",
+          "hide": false,
+          "legendFormat": "Job 7",
+          "range": true,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_8\"}",
+          "hide": false,
+          "legendFormat": "Job 8",
+          "range": true,
+          "refId": "H"
+        }
+      ],
+      "title": "Response time for 10000 iterations on 8 parallel processes",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "labelsToFields": false,
+            "mode": "seriesToRows",
+            "reducers": [
+              "lastNotNull"
+            ]
+          }
+        }
+      ],
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.001
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 0.0015
+              },
+              {
+                "color": "red",
+                "value": 0.002
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 16,
+        "y": 1
+      },
+      "id": 24,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_1\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_2\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_3\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_4\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_5\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_6\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_7\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_8\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "H"
+        },
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "($A+$B+$C+$D+$E+$F+$G+$H) / 80000",
+          "hide": false,
+          "refId": "I",
+          "type": "math"
+        }
+      ],
+      "title": "Average time on 8 parrallel processes",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "max": 10000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 500
+              },
+              {
+                "color": "yellow",
+                "value": 650
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 750
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 5
+      },
+      "id": 15,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Mesure per second$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "builder",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_1_Job(s)_Log_0_Iteration_1_jobnumer_1\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Measure / second",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Mesure per second",
+            "binary": {
+              "left": "1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Value"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "Value"
+              ],
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "description": "Executed lines for 1 measure without request logging",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-yellow",
+                "value": 500
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 750
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 1000
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 5,
+        "y": 5
+      },
+      "id": 32,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Value$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_lines{id=\"REST_1_Job(s)_Log_0_Iteration_1_jobnumer_1\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Executed lines",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 10000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 500
+              },
+              {
+                "color": "yellow",
+                "value": 750
+              },
+              {
+                "color": "green",
+                "value": 1000
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 16,
+        "y": 5
+      },
+      "id": 43,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_1\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_2\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_3\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_4\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_5\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_6\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_7\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_0_Iteration_10000_jobnumer_8\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "H"
+        },
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "1/(($A+$B+$C+$D+$E+$F+$G+$H) / 80000)",
+          "hide": false,
+          "refId": "I",
+          "type": "math"
+        }
+      ],
+      "title": "Measure / Second per process with 8 parallel jobs",
+      "type": "gauge"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 11,
+      "panels": [],
+      "title": "REST Measure with logging",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "description": "This the number of global reference for measuring a REST request including metrics and request logging.",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 100
+              },
+              {
+                "color": "red",
+                "value": 150
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 10
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "builder",
+          "expr": "webmeasure_benchmark_gloref{id=\"REST_1_Job(s)_Log_1_Iteration_1_jobnumer_1\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "GloRef",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-yellow",
+                "value": 0.001
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 0.0015
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 0.002
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 5,
+        "y": 10
+      },
+      "id": 19,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Value$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_1_Job(s)_Log_1_Iteration_1_jobnumer_1\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Response time",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 5
+              },
+              {
+                "color": "orange",
+                "value": 7.5
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 17.5
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 10,
+        "y": 10
+      },
+      "id": 26,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_1\"}",
+          "legendFormat": "Job 1",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_2\"}",
+          "hide": false,
+          "legendFormat": "Job 2",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_3\"}",
+          "hide": false,
+          "legendFormat": "Job 3",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_4\"}",
+          "hide": false,
+          "legendFormat": "Job 4",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_5\"}",
+          "hide": false,
+          "legendFormat": "Job 5",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_6\"}",
+          "hide": false,
+          "legendFormat": "Job 6",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_7\"}",
+          "hide": false,
+          "legendFormat": "Job 7",
+          "range": true,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_8\"}",
+          "hide": false,
+          "legendFormat": "Job 8",
+          "range": true,
+          "refId": "H"
+        }
+      ],
+      "title": "Response time for 10000 iterations on 8 parallel processes",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "labelsToFields": false,
+            "mode": "seriesToRows",
+            "reducers": [
+              "lastNotNull"
+            ]
+          }
+        }
+      ],
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 10000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.001
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 0.0015
+              },
+              {
+                "color": "red",
+                "value": 0.002
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 16,
+        "y": 10
+      },
+      "id": 27,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_1\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_2\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_3\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_4\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_5\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_6\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_7\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_8\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "H"
+        },
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "($A+$B+$C+$D+$E+$F+$G+$H) / 80000",
+          "hide": false,
+          "refId": "I",
+          "type": "math"
+        }
+      ],
+      "title": "Average time on 8 parrallel processes",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "max": 10000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 500
+              },
+              {
+                "color": "yellow",
+                "value": 650
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 1000
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 14
+      },
+      "id": 9,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Mesure per second$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_1_Job(s)_Log_1_Iteration_1_jobnumer_1\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Measure / second",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Mesure per second",
+            "binary": {
+              "left": "1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Value"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "Value"
+              ],
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "description": "Executed lines for 1 measure without request logging",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-yellow",
+                "value": 500
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 750
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 1000
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 5,
+        "y": 14
+      },
+      "id": 25,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Value$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_lines{id=\"REST_1_Job(s)_Log_1_Iteration_1_jobnumer_1\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Executed lines",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 10000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 500
+              },
+              {
+                "color": "yellow",
+                "value": 750
+              },
+              {
+                "color": "green",
+                "value": 1000
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 16,
+        "y": 14
+      },
+      "id": 44,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_1\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_2\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_3\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_4\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_5\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_6\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_7\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_8_Job(s)_Log_1_Iteration_10000_jobnumer_8\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "H"
+        },
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "1/(($A+$B+$C+$D+$E+$F+$G+$H) / 80000)",
+          "hide": false,
+          "refId": "I",
+          "type": "math"
+        }
+      ],
+      "title": "Measure / Second per process with 8 parallel jobs",
+      "type": "gauge"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 4,
+      "panels": [],
+      "title": "CSP Measure without logging",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "description": "This the number of global reference for measuring a REST request including only metrics (without request logging)",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 100
+              },
+              {
+                "color": "red",
+                "value": 150
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 19
+      },
+      "id": 28,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_gloref{id=\"CSP_1_Job(s)_Log_0_Iteration_1_jobnumer_1\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "GloRef",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-yellow",
+                "value": 0.001
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 0.0015
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 0.002
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 5,
+        "y": 19
+      },
+      "id": 29,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Value$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_1_Job(s)_Log_0_Iteration_1_jobnumer_1\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Response time",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 5
+              },
+              {
+                "color": "red",
+                "value": 7.5
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 10,
+        "y": 19
+      },
+      "id": 33,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_1\"}",
+          "legendFormat": "Job 1",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_2\"}",
+          "hide": false,
+          "legendFormat": "Job 2",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_3\"}",
+          "hide": false,
+          "legendFormat": "Job 3",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_4\"}",
+          "hide": false,
+          "legendFormat": "Job 4",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_5\"}",
+          "hide": false,
+          "legendFormat": "Job 5",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_6\"}",
+          "hide": false,
+          "legendFormat": "Job 6",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_7\"}",
+          "hide": false,
+          "legendFormat": "Job 7",
+          "range": true,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_8\"}",
+          "hide": false,
+          "legendFormat": "Job 8",
+          "range": true,
+          "refId": "H"
+        }
+      ],
+      "title": "Response time for 10000 iterations on 8 parallel processes",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "labelsToFields": false,
+            "mode": "seriesToRows",
+            "reducers": [
+              "lastNotNull"
+            ]
+          }
+        }
+      ],
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.001
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 0.0015
+              },
+              {
+                "color": "red",
+                "value": 0.002
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 16,
+        "y": 19
+      },
+      "id": 34,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_1\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_2\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_3\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_4\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_5\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_6\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_7\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_8\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "H"
+        },
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "($A+$B+$C+$D+$E+$F+$G+$H) / 80000",
+          "hide": false,
+          "refId": "I",
+          "type": "math"
+        }
+      ],
+      "title": "Average time on 8 parrallel processes",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "max": 10000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 500
+              },
+              {
+                "color": "yellow",
+                "value": 650
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 750
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 23
+      },
+      "id": 31,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Mesure per second$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "builder",
+          "expr": "webmeasure_benchmark_timing{id=\"REST_1_Job(s)_Log_0_Iteration_1_jobnumer_1\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Measure / second",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Mesure per second",
+            "binary": {
+              "left": "1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Value"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "Value"
+              ],
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "description": "Executed lines for 1 measure without request logging",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-yellow",
+                "value": 500
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 750
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 1000
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 5,
+        "y": 23
+      },
+      "id": 22,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Value$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_lines{id=\"CSP_1_Job(s)_Log_0_Iteration_1_jobnumer_1\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Executed lines",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 10000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 500
+              },
+              {
+                "color": "yellow",
+                "value": 750
+              },
+              {
+                "color": "green",
+                "value": 1000
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 16,
+        "y": 23
+      },
+      "id": 45,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_1\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_2\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_3\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_4\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_5\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_6\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_7\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_0_Iteration_10000_jobnumer_8\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "H"
+        },
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "1/(($A+$B+$C+$D+$E+$F+$G+$H) / 80000)",
+          "hide": false,
+          "refId": "I",
+          "type": "math"
+        }
+      ],
+      "title": "Measure / Second per process with 8 parallel jobs",
+      "type": "gauge"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 27
+      },
+      "id": 36,
+      "panels": [],
+      "title": "CSP with request logging",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "description": "This the number of global reference for measuring a REST request including metrics and request logging.",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 100
+              },
+              {
+                "color": "red",
+                "value": 150
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 28
+      },
+      "id": 37,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_gloref{id=\"CSP_1_Job(s)_Log_1_Iteration_1_jobnumer_1\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "GloRef",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-yellow",
+                "value": 0.001
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 0.0015
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 0.002
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 5,
+        "y": 28
+      },
+      "id": 38,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Value$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "builder",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_1_Job(s)_Log_1_Iteration_1_jobnumer_1\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Response time",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 5
+              },
+              {
+                "color": "orange",
+                "value": 7.5
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 17.5
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 10,
+        "y": 28
+      },
+      "id": 41,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_1\"}",
+          "legendFormat": "Job 1",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_2\"}",
+          "hide": false,
+          "legendFormat": "Job 2",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_3\"}",
+          "hide": false,
+          "legendFormat": "Job 3",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_4\"}",
+          "hide": false,
+          "legendFormat": "Job 4",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_5\"}",
+          "hide": false,
+          "legendFormat": "Job 5",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_6\"}",
+          "hide": false,
+          "legendFormat": "Job 6",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_7\"}",
+          "hide": false,
+          "legendFormat": "Job 7",
+          "range": true,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_8\"}",
+          "hide": false,
+          "legendFormat": "Job 8",
+          "range": true,
+          "refId": "H"
+        }
+      ],
+      "title": "Response time for 10000 iterations on 8 parallel processes",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "labelsToFields": false,
+            "mode": "seriesToRows",
+            "reducers": [
+              "lastNotNull"
+            ]
+          }
+        }
+      ],
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.001
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 0.0015
+              },
+              {
+                "color": "red",
+                "value": 0.002
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 16,
+        "y": 28
+      },
+      "id": 42,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_1\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_2\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_3\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_4\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_5\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_6\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_7\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_8\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "H"
+        },
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "($A+$B+$C+$D+$E+$F+$G+$H) / 80000",
+          "hide": false,
+          "refId": "I",
+          "type": "math"
+        }
+      ],
+      "title": "Average time on 8 parrallel processes",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "max": 10000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 500
+              },
+              {
+                "color": "yellow",
+                "value": 650
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 1000
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 32
+      },
+      "id": 39,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Mesure per second$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "builder",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_1_Job(s)_Log_1_Iteration_1_jobnumer_1\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Measure / second",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Mesure per second",
+            "binary": {
+              "left": "1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Value"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "Value"
+              ],
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "description": "Executed lines for 1 measure without request logging",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-yellow",
+                "value": 500
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 750
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 1000
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 5,
+        "y": 32
+      },
+      "id": 40,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Value$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_lines{id=\"CSP_1_Job(s)_Log_1_Iteration_1_jobnumer_1\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Executed lines",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OFuTp3j4k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 10000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 500
+              },
+              {
+                "color": "yellow",
+                "value": 750
+              },
+              {
+                "color": "green",
+                "value": 1000
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 16,
+        "y": 32
+      },
+      "id": 46,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_1\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_2\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_3\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_4\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_5\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_6\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_7\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OFuTp3j4k"
+          },
+          "editorMode": "code",
+          "expr": "webmeasure_benchmark_timing{id=\"CSP_8_Job(s)_Log_1_Iteration_10000_jobnumer_8\"}",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "H"
+        },
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "1/(($A+$B+$C+$D+$E+$F+$G+$H) / 80000)",
+          "hide": false,
+          "refId": "I",
+          "type": "math"
+        }
+      ],
+      "title": "Measure / Second per process with 8 parallel jobs",
+      "type": "gauge"
+    }
+  ],
+  "refresh": "5m",
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "hide": 2,
+        "name": "timing_red",
+        "query": "0.002",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "isNone": true,
+          "selected": false,
+          "text": "None",
+          "value": ""
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "OFuTp3j4k"
+        },
+        "definition": "",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "query0",
+        "options": [],
+        "query": {
+          "query": "",
+          "refId": "Prometheus-query0-Variable-Query"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "BenchMark - Web Timing Tools",
+  "uid": "BcR4s3C4k",
+  "version": 2,
+  "weekStart": ""
+}
