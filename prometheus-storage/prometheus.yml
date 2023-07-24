@@ -1,0 +1,17 @@
+global:
+  scrape_interval:     15s
+  evaluation_interval: 15s
+
+rule_files:
+  # - "first.rules"
+  # - "second.rules"
+  # http://localhost:30773/api/monitor/metrics
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets: ['localhost:9090']
+  - job_name: isc_iris
+    metrics_path: '/api/monitor/metrics'
+    static_configs:
+      - targets:
+          - "iris:52773"

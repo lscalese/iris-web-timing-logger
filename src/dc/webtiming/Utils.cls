@@ -3,17 +3,13 @@ Include dc.webtiming.macro
 Class dc.webtiming.Utils
 {
 
-ClassMethod RetrieveRoute() As %String
-{
-}
-
 ClassMethod GetCleanURL(
 	Application As %String = {$Select($IsObject(%request):%request.Application,1:"")},
 	URL As %String = {$Select($IsObject(%request):%request.URL,1:"")}) As %String
 {
     If Application = "" Return ""
 
-    If '..IsRestApplication(Application, .DispatchClass) Return $Piece(URL, "?", 1)
+    If '..IsRestApplication(Application, .DispatchClass, .sc) Return $Select($$$ISOK(sc): $Piece(URL, "?", 1), 1: "")
 
     Set URL = $Extract($Piece(URL, "?", 1), $Length(Application), *)
 
@@ -21,7 +17,9 @@ ClassMethod GetCleanURL(
 
     If match Return $Extract(Application, 1, *-1) _ route
 
-    Set ^IRIS.Temp.webtiming("LastError") = $$$FormatText("%1 REST route not found in web application %2 for URL %3", $ZDateTime($Horolog, 3, 1), Application, URL)
+    Set sc = $$$ERROR(5001, $$$FormatText("REST route not found in web application %2 for URL %3", Application, URL))
+    
+    $$$SETLASTERR(sc)
 
     Return ""
 }
@@ -49,49 +47,22 @@ ClassMethod BuildRoute(
 
 ClassMethod IsRestApplication(
 	Application As %String,
-	Output DispatchClass As %String) As %Boolean
+	Output DispatchClass As %String = "",
+	Output sc As %Status = {$$$OK}) As %Boolean
 {
-    If $Data(^IRIS.Temp.webtiming("DispatchClass", Application), DispatchClass) Return DispatchClass '= ""
-
-    Set DispatchClass = ..GetDispatchClass(Application),
-        ^IRIS.Temp.webtiming("DispatchClass", Application) = DispatchClass
-
-    Return DispatchClass '= ""
-}
-
-ClassMethod GetDispatchClass(
-	Application As %String,
-	ByRef sc As %Status = {$$$OK}) As %String
-{
-    Set currentRoles = $Roles
-
-    New $Roles, $Namespace
-    Set $Roles = "%ALL", $Namespace = "%SYS", DispatchClass = ""
+    New $Roles
     
-    Try {
-        Do ##class(Security.Applications).Get(Application, .properties)
-        Set DispatchClass = properties("DispatchClass")
-    } Catch ex {
-        Set sc = ex.AsStatus()
-    }
+    If $Roles '[ "%All", $Roles '[ "%DB_IRISSYS" Set $Roles = $Roles _ ",%DB_IRISSYS"
     
-    Set $Roles = currentRoles
+    Set:$Extract(Application, *)="/" Application = $Extract(Application, 1, *-1)
 
-    Return DispatchClass
-}
+    If $Data(^|"%SYS"|SYS("Security","ApplicationsD", Application), cfg) Set DispatchClass = $ListGet(cfg, 34) Return DispatchClass '= ""
 
-ClassMethod ClearCache() As %Status
-{
-    Kill ^IRIS.Temp.webtiming
-    Return $$$OK
-}
+    Set sc = $$$ERROR(5001, $$$FormatText("Web application %2 not found.", Application))
 
-ClassMethod SetDispatchClassInCache(
-	Application As %String,
-	DispatchClass As %String) As %Status
-{
-    Set ^IRIS.Temp.webtiming("DispatchClass", Application) = DispatchClass
-    Return $$$OK
+    $$$SETLASTERR(sc)
+    
+    Return $$$NO
 }
 
 ClassMethod GenerateFakeData(
