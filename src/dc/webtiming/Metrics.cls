@@ -27,13 +27,12 @@ Parameter TOTALHIT = "total_hit";
 
 Parameter PART = 900;
 
+Parameter SUFFIXPART = "_current_quarter";
+
 Method GetSensors() As %Status
 {
-    Set date = $ZDate($Horolog, 3), part = $Piece($HOROLOG, ",", 2) \ ..#PART
-    
-    Do ..GetWebAppSensors(date, part)
-
-    Quit $$$OK
+    Set sc = ..GetWebAppSensors(), sc = $$$ADDSC(sc, ..GetBenchMarkSensors())
+    Quit sc
 }
 
 Method GetWebAppSensors(
@@ -54,7 +53,7 @@ Method GetWebAppSensors(
 
             Lock -^dc.webtiming.Metrics(url, date)
 
-            Set suffix(1) = "", suffix(2) = "_current_quarter", i = 0
+            Set suffix(1) = "", suffix(2) = ..#SUFFIXPART, i = 0
 
             For tmpData = currentDayData, currentQuarterData {
                 
@@ -66,7 +65,6 @@ Method GetWebAppSensors(
                 Do ..SetSensor(..#TIMINGMAX _ suffix, +$ListGet(tmpData, $$$TIMINGMAX), url)
                 Do ..SetSensor(..#LINESMAX _ suffix, +$ListGet(tmpData, $$$LINESMAX), url)
                 Do ..SetSensor(..#TOTALHIT _ suffix, totalHit, url)
-                
 
                 Continue:totalHit'>0   
                 
@@ -77,11 +75,30 @@ Method GetWebAppSensors(
             }
             
         }
-    }catch (ex) {
-        s ^CacheTempLsc= ex.AsStatus()
+    } Catch ex {
+        Set sc = ex.AsStatus()
+        $$$SETLASTERR(sc)
     }
 
     Return $$$OK
+}
+
+Method GetBenchMarkSensors() As %Status
+{
+    If '$Data(^dc.webtiming.Metrics.bm) Quit $$$OK
+
+    Set sc = $$$OK, key = ""
+    For  {
+        Set key = $Order(^dc.webtiming.Metrics.bm(key), 1, data)
+        Quit:key=""
+
+        Do ..SetSensor("benchmark_gloref", +$ListGet(data, 1), key)
+        Do ..SetSensor("benchmark_lines", +$ListGet(data, 2), key)
+        Do ..SetSensor("benchmark_timing", +$ListGet(data, 3), key)
+        
+    }
+
+    Quit sc
 }
 
 ClassMethod SetMetrics(Application As %String = {$Select($IsObject($Get(%request)):%request.Application, 1:"")}) As %Status
@@ -93,12 +110,9 @@ ClassMethod SetMetrics(Application As %String = {$Select($IsObject($Get(%request
     Set gloRef = ##class(dc.webtiming.Measure).GetGlobals(),
         timing = ##class(dc.webtiming.Measure).GetTiming(),
         lines = ##class(dc.webtiming.Measure).GetLines(),
-        url = ##class(dc.webtiming.Measure).GetCleanURL()
+        url = ##class(dc.webtiming.Measure).GetCleanURL(),
+        urlMetricsEnabled = $Select(url '= "": ##class(dc.webtiming.Config).IsURLMetricsEnabled(), 1: $$$NO)
     
-    Set:url="" url = " " ; shouldn't occur but it's just <subscript> error security.
-
-    Set urlMetricsEnabled = ##class(dc.webtiming.Config).IsURLMetricsEnabled()
-
     Lock +^dc.webtiming.Metrics(Application, date):2
     
     If '$Test Return $$$ERROR(5001, "Failed to acquire an exclusive lock.")
@@ -150,9 +164,18 @@ ClassMethod SetMetrics(Application As %String = {$Select($IsObject($Get(%request
     Return sc
 }
 
+ClassMethod SetBenchmarkMetrics(
+	Name As %String,
+	Id As %String,
+	Value As %String) As %Status
+{
+    ;Set ^dc.webtiming.Metrics.bm(Name)=$List
+}
+
 ClassMethod PurgeMetrics() As %Status
 {
     Lock +^dc.webtiming.Metrics:2
+
     If '$Test Return $$$ERROR(5001, "Failed to acquire an exclusive lock.")
 
     Kill ^dc.webtiming.Metrics

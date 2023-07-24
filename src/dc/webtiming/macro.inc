@@ -14,3 +14,5 @@ ROUTINE dc.webtiming.macro [Type=INC]
 #Define CURRENTQUARTERFORAPPLICATION    2
 #Define CURRENTDAYFORURL                3
 #Define CURRENTQUARTERFORURL            4
+
+#Def1arg SETLASTERR(%arg)               Set %objlasterror = %arg, ^IRIS.Temp.webtiming("LastError") = $ZDateTime($Horolog, 3, 1) _ " "_ $SYSTEM.Status.GetErrorText(%arg)
