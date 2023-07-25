@@ -64,6 +64,7 @@ Method GetWebAppSensors(
                 Do ..SetSensor(..#LINESTOTAL _ suffix, +$ListGet(tmpData, $$$LINESTOTAL), url)
                 Do ..SetSensor(..#TIMINGMAX _ suffix, +$ListGet(tmpData, $$$TIMINGMAX), url)
                 Do ..SetSensor(..#LINESMAX _ suffix, +$ListGet(tmpData, $$$LINESMAX), url)
+                Do ..SetSensor(..#GLOREFMAX _ suffix, +$ListGet(tmpData, $$$GLOREFMAX), url)
                 Do ..SetSensor(..#TOTALHIT _ suffix, totalHit, url)
 
                 Continue:totalHit'>0   
@@ -119,14 +120,10 @@ ClassMethod SetMetrics(Application As %String = {$Select($IsObject($Get(%request
 
     Try {
 
-        Set data($$$CURRENTDAYFORAPPLICATION) = $Get(^dc.webtiming.Metrics(Application, date)),
-            data($$$CURRENTQUARTERFORAPPLICATION) = $Get(^dc.webtiming.Metrics(Application, date, part))
         
-        If urlMetricsEnabled {
-            Set data($$$CURRENTDAYFORURL) = $Get(^dc.webtiming.Metrics(url, date)),
-                data($$$CURRENTQUARTERFORURL) = $Get(^dc.webtiming.Metrics(url, date, part))
-        }
-
+        Set data($$$CURRENTDAYFORURL) = $Get(^dc.webtiming.Metrics(url, date)),
+            data($$$CURRENTQUARTERFORURL) = $Get(^dc.webtiming.Metrics(url, date, part))
+        
         Set key = ""
 
         For  {
@@ -145,13 +142,9 @@ ClassMethod SetMetrics(Application As %String = {$Select($IsObject($Get(%request
             Set data(key) = tmp
         }
 
-        Set ^dc.webtiming.Metrics(Application, date) = data($$$CURRENTDAYFORAPPLICATION),
-            ^dc.webtiming.Metrics(Application, date, part) = data($$$CURRENTQUARTERFORAPPLICATION)
+        Set ^dc.webtiming.Metrics(url, date) = data($$$CURRENTDAYFORURL),
+            ^dc.webtiming.Metrics(url, date, part) = data($$$CURRENTQUARTERFORURL)
         
-        If urlMetricsEnabled {
-            Set ^dc.webtiming.Metrics(url, date) = data($$$CURRENTDAYFORURL),
-                ^dc.webtiming.Metrics(url, date, part) = data($$$CURRENTQUARTERFORURL)
-        }
 
         Lock -^dc.webtiming.Metrics(Application, date)
 
