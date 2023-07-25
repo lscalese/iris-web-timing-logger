@@ -15,8 +15,6 @@ Property IsLogEnabled As %Boolean [ InitialExpression = {##class(dc.webtiming.Co
 
 Property IsMetricsEnabled As %Boolean [ InitialExpression = {##class(dc.webtiming.Config).IsMetricsEnabled()} ];
 
-Property IsURLMetricsEnabled As %Boolean [ InitialExpression = {##class(dc.webtiming.Config).IsURLMetricsEnabled()} ];
-
 Property Timing As %Float;
 
 Property Lines As %Integer;
@@ -78,7 +76,6 @@ ClassMethod Run(
             
             Do ##class(dc.webtiming.Config).SetMeasureEnabled($$$YES)
             Do ##class(dc.webtiming.Config).SetMetricsEnabled($$$YES)
-            Do ##class(dc.webtiming.Config).SetURLMetricsEnabled($$$YES)
             Do ##class(dc.webtiming.Config).SetLogEnabled($$$NO)
 
             Set itemTempData.Name = $$$FormatText(templateName, itemTempData.numberOfJob, "Enabled", $s(##class(dc.webtiming.Config).IsLogEnabled():"Enabled",1:"Disabled"), itemTempData.Iteration)
@@ -296,9 +293,6 @@ Storage Default
 </Value>
 <Value name="7">
 <Value>IsMetricsEnabled</Value>
-</Value>
-<Value name="8">
-<Value>IsURLMetricsEnabled</Value>
 </Value>
 <Value name="9">
 <Value>Timing</Value>

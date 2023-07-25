@@ -27,17 +27,7 @@ ClassMethod LogRequest(
     Set log.URLClean = ##class(dc.webtiming.Measure).GetCleanURL()
     Set log.PageName = Request.PageName
     Set log.Application = Request.Application
-    
-    ;Set oldTM = $SYSTEM.OBJ.SetTransactionMode(0), jrnState = $$CURRENT^%NOJRN
-    Try {
-        ;Do:jrnState DISABLE^%NOJRN
-        Set sc = log.%Save()
-    } Catch ex {
-        Set sc = ex.AsStatus()
-    }
-    ;Do $SYSTEM.OBJ.SetTransactionMode(oldTM)
-    ;Do:jrnState ENABLE^%NOJRN
-    
+    Set sc = log.%Save()
     
     Return sc
 }

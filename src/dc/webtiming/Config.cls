@@ -22,11 +22,6 @@ ClassMethod IsMetricsEnabled() As %Boolean
     Return ''..GetConfig("MetricsEnabled")
 }
 
-ClassMethod IsURLMetricsEnabled() As %Boolean
-{
-    Return ''..GetConfig("URLMetricsEnabled")
-}
-
 ClassMethod SetLogEnabled(value As %Boolean) As %Boolean
 {
     Return ..SetConfig("LogEnabled", value)
@@ -40,11 +35,6 @@ ClassMethod SetMeasureEnabled(value As %Boolean) As %Boolean
 ClassMethod SetMetricsEnabled(value As %Boolean) As %Boolean
 {
     Return ..SetConfig("MetricsEnabled", value)
-}
-
-ClassMethod SetURLMetricsEnabled(value As %Boolean) As %Boolean
-{
-    Return ..SetConfig("URLMetricsEnabled", value)
 }
 
 ClassMethod GetConfig(key As %String) As %String
@@ -216,7 +206,6 @@ ClassMethod DefaultSetup() As %Status
     Set sc = $$$ADDSC(sc, ##class(dc.webtiming.Config).Initialize())
     Set sc = $$$ADDSC(sc, ##class(dc.webtiming.Config).SetLogEnabled($$$YES))
     Set sc = $$$ADDSC(sc, ##class(dc.webtiming.Config).SetMetricsEnabled($$$YES))
-    Set sc = $$$ADDSC(sc, ##class(dc.webtiming.Config).SetURLMetricsEnabled($$$YES))
     Set sc = $$$ADDSC(sc, ##class(dc.webtiming.Config).AddToPercentAllNS())
 
     Quit sc
@@ -260,10 +249,6 @@ XData Description [ MimeType = application/json ]
         "MetricsEnabled" : {
             "Default" : "0",
             "Description": "Enable/Disable metrics (value 0 or 1)"
-        },
-        "URLMetricsEnabled" : {
-            "Default" : "0",
-            "Description": "Enable/Disable metrics at URL level (value 0 or 1)"
         },
         "LogStopAt" : {
             "Default" : "",
