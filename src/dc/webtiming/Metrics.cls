@@ -111,8 +111,7 @@ ClassMethod SetMetrics(Application As %String = {$Select($IsObject($Get(%request
     Set gloRef = ##class(dc.webtiming.Measure).GetGlobals(),
         timing = ##class(dc.webtiming.Measure).GetTiming(),
         lines = ##class(dc.webtiming.Measure).GetLines(),
-        url = ##class(dc.webtiming.Measure).GetCleanURL(),
-        urlMetricsEnabled = $Select(url '= "": ##class(dc.webtiming.Config).IsURLMetricsEnabled(), 1: $$$NO)
+        url = ##class(dc.webtiming.Measure).GetCleanURL()
     
     Lock +^dc.webtiming.Metrics(Application, date):2
     
