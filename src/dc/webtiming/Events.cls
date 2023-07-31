@@ -9,7 +9,8 @@ ClassMethod OnStart() As %Status
 
     Set sc = $$$OK,
         sc = $$$ADDSC(sc, ##class(dc.webtiming.Measure).Start()),
-        sc = $$$ADDSC(sc, ##class(dc.webtiming.Measure).SetCleanURL(##class(dc.webtiming.Utils).GetCleanURL()))
+        sc = $$$ADDSC(sc, ##class(dc.webtiming.Measure).SetCleanURL(##class(dc.webtiming.Utils).GetCleanURL())),
+        sc = $$$ADDSC(sc, ##class(dc.webtiming.Measure).SetMethod())
     
     If $$$ISOK(sc) Return sc
 

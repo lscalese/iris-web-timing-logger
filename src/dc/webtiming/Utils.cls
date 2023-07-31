@@ -97,7 +97,7 @@ ClassMethod GenerateFakeData(
         Set $$$MEASUREVAR(name, "globals") = $Random($$$MEASUREVAR(name, "lines"))
         Do ##class(dc.webtiming.Measure).SetCleanURL(request.URL)
 
-        If IsMetricsEnabled Set sc = $$$ADDSC(sc, ##class(dc.webtiming.Metrics).SetMetrics(Application))
+        If IsMetricsEnabled Set sc = $$$ADDSC(sc, ##class(dc.webtiming.Metrics).SetMetrics())
         If IsLogEnabled Set sc = $$$ADDSC(sc, ##class(dc.webtiming.Logger).LogRequest(name, session, request, response))
     }
 

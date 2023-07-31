@@ -102,26 +102,28 @@ Method GetBenchMarkSensors() As %Status
     Quit sc
 }
 
-ClassMethod SetMetrics(Application As %String = {$Select($IsObject($Get(%request)):%request.Application, 1:"")}) As %Status
+ClassMethod SetMetrics() As %Status
 {
-    If $Get(Application) = "" Return $$$ERROR(5001, "Parameter ""Application"" is mandatory")
-
     Set tHorolog = $Horolog, date = $ZDate(tHorolog, 3), part = $Piece(tHorolog, ",", 2) \ ..#PART, sc = $$$OK
     
     Set gloRef = ##class(dc.webtiming.Measure).GetGlobals(),
         timing = ##class(dc.webtiming.Measure).GetTiming(),
         lines = ##class(dc.webtiming.Measure).GetLines(),
-        url = ##class(dc.webtiming.Measure).GetCleanURL()
+        url = ##class(dc.webtiming.Measure).GetCleanURL(), 
+        method = ##class(dc.webtiming.Measure).GetMethod(),
+        id = method _ "_" _ url
     
-    Lock +^dc.webtiming.Metrics(Application, date):2
+    If url = "" Return $$$ERROR(5001, "url is required.")
+
+    Lock +^dc.webtiming.Metrics(id, date):2
     
     If '$Test Return $$$ERROR(5001, "Failed to acquire an exclusive lock.")
 
     Try {
 
         
-        Set data($$$CURRENTDAYFORURL) = $Get(^dc.webtiming.Metrics(url, date)),
-            data($$$CURRENTQUARTERFORURL) = $Get(^dc.webtiming.Metrics(url, date, part))
+        Set data($$$CURRENTDAYFORURL) = $Get(^dc.webtiming.Metrics(id, date)),
+            data($$$CURRENTQUARTERFORURL) = $Get(^dc.webtiming.Metrics(id, date, part))
         
         Set key = ""
 
@@ -141,27 +143,18 @@ ClassMethod SetMetrics(Application As %String = {$Select($IsObject($Get(%request
             Set data(key) = tmp
         }
 
-        Set ^dc.webtiming.Metrics(url, date) = data($$$CURRENTDAYFORURL),
-            ^dc.webtiming.Metrics(url, date, part) = data($$$CURRENTQUARTERFORURL)
+        Set ^dc.webtiming.Metrics(id, date) = data($$$CURRENTDAYFORURL),
+            ^dc.webtiming.Metrics(id, date, part) = data($$$CURRENTQUARTERFORURL)
         
-
-        Lock -^dc.webtiming.Metrics(Application, date)
+        Lock -^dc.webtiming.Metrics(id, date)
 
     } Catch(ex) {
 
-        Lock -^dc.webtiming.Metrics(Application, date)
+        Lock -^dc.webtiming.Metrics(id, date)
         Set sc = ex.AsStatus()
     }
 
     Return sc
-}
-
-ClassMethod SetBenchmarkMetrics(
-	Name As %String,
-	Id As %String,
-	Value As %String) As %Status
-{
-    ;Set ^dc.webtiming.Metrics.bm(Name)=$List
 }
 
 ClassMethod PurgeMetrics() As %Status

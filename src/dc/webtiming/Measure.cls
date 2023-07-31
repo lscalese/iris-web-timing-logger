@@ -60,4 +60,31 @@ ClassMethod GetCleanURL(Name As %String = {..#DEFAULT}) As %String [ CodeMode = 
 $Get($$$MEASUREVAR(Name, "clean_url"))
 }
 
+ClassMethod SetMethod(
+	Name As %String = {..#DEFAULT},
+	Method As %String = {$Select($IsObject(%request): %request.Method, 1:"")}) As %Status
+{
+    Set $$$MEASUREVAR(Name, "Method") = Method  Quit $$$OK
+}
+
+ClassMethod GetMethod(Name As %String = {..#DEFAULT}) As %Status [ CodeMode = expression ]
+{
+$Get($$$MEASUREVAR(Name, "Method"))
+}
+
+ClassMethod SetData(
+	Name As %String = {..#DEFAULT},
+	DataKey As %String,
+	DataValue As %String) As %Status
+{
+    Set $$$MEASUREVAR(Name, DataKey) = DataValue  Quit $$$OK
+}
+
+ClassMethod GetData(
+	Name As %String = {..#DEFAULT},
+	DataKey As %String) As %Status [ CodeMode = expression ]
+{
+$Get($$$MEASUREVAR(Name, DataKey))
+}
+
 }
