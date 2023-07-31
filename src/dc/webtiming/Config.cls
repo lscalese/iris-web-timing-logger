@@ -216,6 +216,12 @@ ClassMethod DockerInit()
     Do ..DefaultSetup()
 
     Do ..AddEventClassToWebApp("/api/monitor", "dc.webtiming.CSPSessionEvents")
+    Do ..AddEventClassToWebApp("/api/atelier", "dc.webtiming.CSPSessionEvents")
+    Do ..AddEventClassToWebApp("/csp/sys", "dc.webtiming.CSPSessionEvents")
+    Do ..AddEventClassToWebApp("/csp/sys/exp", "dc.webtiming.CSPSessionEvents")
+    Do ..AddEventClassToWebApp("/csp/sys/mgr", "dc.webtiming.CSPSessionEvents")
+    Do ..AddEventClassToWebApp("/csp/sys/op", "dc.webtiming.CSPSessionEvents")
+    Do ..AddEventClassToWebApp("/csp/sys/sec", "dc.webtiming.CSPSessionEvents")
 
     Quit
 }
