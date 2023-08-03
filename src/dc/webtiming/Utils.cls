@@ -34,7 +34,9 @@ ClassMethod BuildRoute(
 	
 	If tMapEntry = "" Return ""
 	
-	If $List(tMapEntry, 1) = "R" Set match = $$$YES Return out _ $Replace(tMatcher.Pattern, "([^/]+)", "<parameter>")
+	;If $List(tMapEntry, 1) = "R" Set match = $$$YES Return out _ $Replace(tMatcher.Pattern, "([^/]+)", "<parameter>")
+
+    If $List(tMapEntry, 1) = "R" Set match = $$$YES Return out _ tMatcher.Pattern
 	
 	Set tRegEx = $List(tMapEntry,2),
 		DispatchClass = $List(tMapEntry,3),
